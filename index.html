@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World!</title>
+  <!-- Include Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      overflow: hidden;
+      color: #fff;
+      position: relative;
+    }
+    h1, .get-in-touch {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      animation: glow 1s ease-in-out infinite alternate;
+    }
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle linear infinite;
+    }
+    @keyframes twinkle {
+      0% {opacity: 0;}
+      50% {opacity: 1;}
+      100% {opacity: 0;}
+    }
+    @keyframes glow {
+      0% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);}
+      100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);}
+    }
+    .icons-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .icon {
+      font-size: 30px;
+      margin: 0 10px;
+    }
+    .whatsapp {
+      color: #25D366; /* Warna WhatsApp */
+    }
+    .telegram {
+      color: #0088cc; /* Warna Telegram */
+    }
+    .gitlab {
+      color: #fc6d26; /* Warna GitLab */
+    }
+    .get-in-touch {
+      font-size: 20px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stars"></div>
+
+  <h1>Setup by @urahime</h1>
+
+  <p class="get-in-touch">Get in touch:</p>
+
+  <div class="icons-container">
+    <a href="https://api.whatsapp.com/send?phone=62881010650338" target="_blank" class="icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://t.me/urahime" target="_blank" class="icon telegram"><i class="fab fa-telegram"></i></a>
+    <a href="https://gitlab.com/Hiworld" target="_blank" class="icon gitlab"><i class="fab fa-gitlab"></i></a>
+  </div>
+
+  <script>
+    function createStars() {
+      const starsContainer = document.querySelector('.stars');
+      const numStars = 200; // Jumlah bintang
+
+      for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = `${Math.random() * 2}px`;
+        star.style.height = star.style.width;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        starsContainer.appendChild(star);
+        animateStar(star);
+      }
+    }
+
+    function animateStar(star) {
+      const duration = Math.random() * 1.5 + 0.5; // Durasi animasi antara 0.5 dan 2 detik
+      const delay = Math.random(); // Tunda animasi antara 0 dan 1 detik
+
+      star.style.animation = `twinkle ${duration}s ${delay}s infinite`;
+
+      // Rekursif untuk animasi selanjutnya setelah selesai
+      setTimeout(() => animateStar(star), (duration + delay) * 1000);
+    }
+
+    createStars(); // Membuat bintang saat halaman dimuat
+  </script>
+
+</body>
+</html>

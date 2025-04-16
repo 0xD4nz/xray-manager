@@ -1,0 +1,130 @@
+{
+    "log": {
+        "access": "/var/log/xray/access.log",
+        "error": "/var/log/xray/error.log",
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "port": 10000,
+            "listen": "127.0.0.1",
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "c8e5c2ae-5b14-469f-b2d4-2df6c3641628",
+                        "level": 0
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                    "path": "/vless-ws"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ],
+                "metadataOnly": false
+            }
+        },
+        {
+            "port": 10001,
+            "listen": "127.0.0.1",
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "c8e5c2ae-5b14-469f-b2d4-2df6c3641628",
+                        "alterId": 0
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "wsSettings": {
+                    "path": "/vmess-ws"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ],
+                "metadataOnly": false
+            }
+        },
+        {
+            "port": 10002,
+            "listen": "127.0.0.1",
+            "protocol": "shadowsocks",
+            "settings": {
+                "clients": [
+                    {
+                        "method": "chacha20-ietf-poly1305",
+                        "password": "c8e5c2ae-5b14-469f-b2d4-2df6c3641628"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "wsSettings": {
+                    "path": "/ss-ws"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ],
+                "metadataOnly": false
+            }
+        },
+        {
+            "listen": "127.0.0.1",
+            "port": 10003,
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "c8e5c2ae-5b14-469f-b2d4-2df6c3641628",
+                        "level": 8
+                    }
+                ],
+                "fallbacks": [
+                    {
+                        "dest": "www.google.com:443"
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "trojan-grpc"
+                }
+            }
+        }
+    ],
+    "dns": {
+        "servers": [
+            "https+local://8.8.8.8/dns-query"
+        ]
+    },
+    "outbounds": [
+        {
+            "protocol": "freedom"
+        }
+    ]
+}
