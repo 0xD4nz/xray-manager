@@ -349,19 +349,6 @@ enable_services() {
     log_success "Services enabled and started successfully"
 }
 
-disable_ipv6() {
-    log_info "Disabling IPv6"
-    if sysctl -w net.ipv6.conf.all.disable_ipv6=1 && \
-       sysctl -w net.ipv6.conf.default.disable_ipv6=1 && \
-       echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf && \
-       echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf; then
-        log_success "IPv6 disabled successfully"
-    else
-        log_error "Failed to disable IPv6"
-        return 1
-    fi
-}
-
 show_summary() {
     local domain=""
     if [ -f "/etc/xray/domain.txt" ]; then
